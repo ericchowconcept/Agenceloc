@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion des membres{% endblock %}
+
+{% block body %}
+<div class="container mt-3">
+    <table class="table table-light">
+        <thead class="thead-dark">
+            <tr>
+                <th>id membre</th>
+                <th>pseudo</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>email</th>
+                <th>Civilité</th>
+                <th>Statut</th>
+                <th>date_enregistrement</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membre in membres %}   
+            <tr>
+                <td>{{ membre.id }}</td>
+                <td>{{ membre.pseudo }}</td>
+                <td>{{ membre.nom }}</td>
+                <td>{{ membre.prenom }}</td>
+                <td>{{ membre.email }}</td>
+                <td>{{ membre.civilite }}</td>
+                <td>{{ membre.roles }}</td>
+                <td>{{ membre.date_enregistrement|date('d/m/Y h:i') }}</td>
+                <td>
+                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
+                    <a href="" class="text-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="" class="text-danger"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>      
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+    </div>
+</div>
+
+
+{% endblock %}

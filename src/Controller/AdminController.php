@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Membre;
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
+use App\Repository\MembreRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,11 +23,9 @@ class AdminController extends AbstractController
         ]);
     }
 
-   
-
     #[Route('/admin/vehicule', name:'admin_vehicule')]
     #[Route('/admin/vehicule/edit/{id}', name:'admin_vehicule_edit')]
-    public function addVehicule(Request $request, EntityManagerInterface $manager, VehiculeRepository $repo, Vehicule $vehicule = null): Response
+    public function Vehicule(Request $request, EntityManagerInterface $manager, VehiculeRepository $repo, Vehicule $vehicule = null): Response
     {
         if($vehicule == null)
         {
@@ -62,5 +62,16 @@ class AdminController extends AbstractController
         $this->addFlash('success', "L'article a bien été supprimé");
         return $this->redirectToRoute('admin_vehicule');
 
+    }
+
+    #[Route('/admin/membre', name:'admin_membre')]
+    public function Membre(MembreRepository $repo, EntityManagerInterface $manager)
+    {
+        
+        $membres = $repo->findAll();
+       
+        return $this->render('admin/gestionMembre.html.twig',[
+            'membres' => $membres
+        ]);
     }
 }
