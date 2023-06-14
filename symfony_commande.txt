@@ -15,7 +15,8 @@ composer create-project symfony/skeleton:"^5.4" nom_du_projet
 2.)Créer la database (le terme doctrine est l'ORM de symfony)
 	- .env commenter la DATABASE_URL(postgresql) et décommenter la DATABASE_URL(mysql) et modifier ce qu'il y a 
 	modifier DATABASE_URL="mysql://root@127.0.0.1:3306/nomdelaBDD"
-	- php bin/console doctrine:database:create raccourci d:c:c   ->après config de la BDD en .env permet de créer la BDD
+	- php bin/console doctrine:database:create raccourci d:c:c  
+	 ->après config de la BDD en .env permet de créer la BDD
 
 3.)Créer des entitées
 	- php bin/console make:entity NomEntity
