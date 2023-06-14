@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion des Vehicules{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-dark text-center w-50 mx-auto my-2">{{ message }}</div>   
+{% endfor %}
+<div class="container mt-3">
+    <table class="table table-light">
+        <thead class="thead-dark">
+            <tr >
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Marque</th>
+                <th>Modèle</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Prix</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicule in vehicules %}
+            <tr >
+                <td>{{ vehicule.id }}</td>
+                <td>{{ vehicule.titre }}</td>
+                <td>{{ vehicule.marque }}</td>
+                <td>{{ vehicule.modele }}</td>
+                <td>{{ vehicule.description }}</td>
+                <td><img src="{{ vehicule.photo }}" alt="" width="100px"></td>
+                <td>{{ vehicule.PrixJournalier() }}€</td>
+                <td>
+                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
+                    <a href="{{ path('admin_vehicule_edit', {id: vehicule.id}) }}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ path('admin_vehicule_delete', {id: vehicule.id}) }}" class="text-danger"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container mt-2">
+        {{ form_start(formVehicule,{
+            attr:{
+                novalidate : 'novalidate'
+            }
+        }) }}
+    <div class="row">
+        <div class="col-6">{{ form_row(formVehicule.titre, {label: 'Titre'}) }}</div>
+        <div class="col-6">{{ form_row(formVehicule.marque, {label: 'Marque'}) }}</div>
+        <div class="col-6">{{ form_row(formVehicule.modele, {label: 'Modèle'}) }}</div>
+        <div class="col-6">{{ form_row(formVehicule.prix_journalier, {label: 'Prix/jour'}) }}</div>
+        <div class="col-6">{{ form_row(formVehicule.photo, {label: 'Photo'}) }}</div>
+        <div class="col-6">{{ form_row(formVehicule.description, {label: 'Description'}) }}</div>
+        
+    </div>
+    <button type="submit" class="btn btn-primary mb-5">Enregistré</button>
+        {{ form_end(formVehicule) }}
+    
+</div>
+
+
+
+
+{% endblock %}
