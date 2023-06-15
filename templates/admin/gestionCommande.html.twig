@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion des commandes{% endblock %}
+
+{% block body %}
+<div class="container mt-3">
+    <table class="table table-light">
+        <thead class="thead-dark">
+            <tr>
+                <th>Commande</th>
+                <th>Membre</th>
+                <th>Vehicule</th>
+                <th>Date et Heure de départ</th>
+                <th>Date et Heure de fin</th>
+                <th>Prix total</th>
+                <th>Date et Heure d'enregistrement</th>
+                <th>Action</th>   
+            </tr>
+        </thead>
+        <tbody>
+              
+            <tr>
+                <td></td>
+                <td>
+                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
+                    <a href="" class="text-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="" class="text-danger"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>      
+            
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="container card my-5">
+  <div class="row p-5">
+    <div class="col-6 d-flex align-center justify-content-center">
+      <img src="{{ vehicule.photo }}" alt="">
+    </div>
+    <div class="card-body col-6">
+      
+        
+      <h4 class="card-title">{{ vehicule.titre }}</h4>
+      
+      <p class="card-text md-3">{{ vehicule.description }}</p>
+      <h5 class="card-subtitle mb-4 text-muted">{{ vehicule.prixjournalier }}€/jour</h5>
+      <div class="my-2">
+        {{form_start(formCommande) }}
+        
+        {{form_row(formCommande.date_heure_depart) }}
+        {{form_row(formCommande.date_heure_fin) }}
+        
+        
+        <div class="d-flex p-2">
+          <button type="submit" class="btn btn-primary">Réserver</button>
+          {{form_end(formCommande) }}
+          
+          {# <a href="admin_vehicule_edit" class="btn btn-warning">Edit</a> #}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+ 
+
+{% endblock %}

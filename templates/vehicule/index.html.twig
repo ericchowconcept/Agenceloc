@@ -3,7 +3,37 @@
 {% block title %}Welcome{% endblock %}
 
 {% block body %}
+<div class="p-5 text-center bg-image rounded-3" style="
+    background-image: url('https://www.topgear.com/sites/default/files/2023/05/32748-TTRSICONICDEANSMITH037_0.jpg?w=892&h=502');
+    height: 600px;
+    background-size: cover;
+    background-position: center;">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="my-3 text-white">Bienvenue à bord</h1>
+        <h3 class="my-4 text-white">Location de voiture 24h/24 et 7j/7</h3>
+        <a class="btn btn-outline-light" href="#voitures">Louer une voiture</a>
+      </div>
+    </div>
+</div>
 
-<h1 class="text-center my-3">Bienvenue à bord</h1>
-<p class="text-center my-1">Location de voiture 24h/24 et 7j/7</p>
+{% for vehicule in vehicules %}
+<div class="container card mt-3" id="voitures">
+    <div class="row p-2">
+        <div class="col-6 d-flex justify-content-center align-center">
+            <img src="{{ vehicule.photo }}" alt="">
+        </div>
+        <div class="col-6  bg-light mb-3" >
+        <div class="card-header">{{ vehicule.titre }}</div>
+            <div class="card-body">
+                <p class="card-text">{{ vehicule.description }}</p>
+                <h4 class="card-title">{{ vehicule.PrixJournalier() }}€/jour</h4>
+                <a href="{{ path('view', {id:vehicule.id}) }}" class="btn btn-success rounded my-2">Réserver et Payer</a>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endfor %}
+
 {% endblock %}
