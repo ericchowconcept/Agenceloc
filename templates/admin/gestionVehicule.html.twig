@@ -6,6 +6,11 @@
 {% for message in app.flashes('success') %}
 <div class="alert alert-dark text-center w-50 mx-auto my-2">{{ message }}</div>   
 {% endfor %}
+ {# {% if path('admin_vehicule_edit', {id: vehicule.id}) %} #}
+    <div class="d-flex justify-content-center my-3">
+        <a href="{{ path('admin_vehicule') }}" class="btn btn-primary">Ajouter un nouvel vehicule</a>
+    </div>
+    {# {% endif %} #}
 <div class="container mt-3">
     <table class="table table-light">
         <thead class="thead-dark">

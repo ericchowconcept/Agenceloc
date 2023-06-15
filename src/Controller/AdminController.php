@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Membre;
 use App\Entity\Vehicule;
+use App\Form\MembreType;
 use App\Form\VehiculeType;
 use App\Repository\MembreRepository;
 use App\Repository\VehiculeRepository;
@@ -63,15 +64,34 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_vehicule');
 
     }
-
-    #[Route('/admin/membre', name:'admin_membre')]
-    public function Membre(MembreRepository $repo, EntityManagerInterface $manager)
+    #[Route('/admin/membres/edit/{id}', name:'admin_membre_edit')]
+    #[Route('/admin/membres', name:'admin_membre')]
+    public function Membre(MembreRepository $repo, EntityManagerInterface $manager, Request $request, Membre $membre = null)
     {
+        if( $membre == null)
+        {
+            $membre = new Membre;
+        }
         
         $membres = $repo->findAll();
        
+        $formMembre = $this->createForm(MembreType::class, $membre);
+        $formMembre->handleRequest($request);
+
+        if($formMembre->isSubmitted() && $formMembre->isValid())
+        {
+            $membre->setDateEnregistrement(new \DateTime());
+            $manager->persist($membre);
+            $manager->flush();
+            $this->addFlash('success', "Le membre est bien modifié");
+
+            return $this->redirectToRoute('admin_membre');
+        }
+
         return $this->render('admin/gestionMembre.html.twig',[
-            'membres' => $membres
+            'formMembre' => $formMembre->createView(),
+            'membres' => $membres,
+            'editMembre' => $membre->getId()!=null
         ]);
     }
 }

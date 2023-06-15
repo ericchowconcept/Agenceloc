@@ -27,11 +27,11 @@
                 <td>{{ membre.prenom }}</td>
                 <td>{{ membre.email }}</td>
                 <td>{{ membre.civilite }}</td>
-                <td>{{ membre.roles }}</td>
-                <td>{{ membre.date_enregistrement|date('d/m/Y h:i') }}</td>
+                <td>{{ membre.roles| join(',') }}</td>
+                <td>{{ membre.dateenregistrement|date('d/m/Y H:i') }}</td>
                 <td>
                     <a href="" class="text-info"><i class="bi bi-search"></i></a>
-                    <a href="" class="text-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ path('admin_membre_edit', {id: membre.id}) }}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
                     <a href="" class="text-danger"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>      
@@ -40,15 +40,20 @@
     </table>
 </div>
 <div class="container">
+        {{ form_start(formMembre, {
+            attr:{
+                novalidate : 'novalidate'
+            }
+        }) }}
     <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6"></div>
-        <div class="col-6"></div>
-        <div class="col-6"></div>
-        <div class="col-6"></div>
-        <div class="col-6"></div>
-        <div class="col-6"></div>
+        <div class="col-12">{{ form_row(formMembre.roles, {label: 'Statut'} ) }}</div>
+        <div class="col-12">{{ form_row(formMembre.civilite, {label: 'Civilité'} ) }}</div>
+        <div class="col-6">{{ form_row(formMembre.pseudo, {label: 'Pseudo'} ) }}</div>
+        <div class="col-6">{{ form_row(formMembre.email, {label: 'Email'} ) }}</div>
+        
     </div>
+        <button class="btn btn-primary">Modifié</button>
+        {{ form_start(formMembre) }}
 </div>
 
 
