@@ -18,15 +18,24 @@
             </tr>
         </thead>
         <tbody>
-              
+            {% for commande in commandes %}
             <tr>
-                <td></td>
+                <td>{{ commande.id }}</td>
+                <td>
+                    {{ commande.membre.id }}-{{ commande.membre.prenom }} {{ commande.membre.nom }}-{{ commande.membre.email }}
+                </td>
+                <td>{{ commande.vehicule.id }}-{{ commande.vehicule.titre }}</td>
+                <td>{{ commande.DateHeureDepart|date('d/m/Y H:i') }}</td>
+                <td>{{ commande.DateHeureFin|date('d/m/Y H:i') }}</td>
+                <td>{{ commande.Prixtotal }}€</td>
+                <td>{{ commande.DateEnregistrement|date('d/m/Y H:i') }}</td>
                 <td>
                     <a href="" class="text-info"><i class="bi bi-search"></i></a>
                     <a href="" class="text-warning"><i class="bi bi-pencil-square"></i></a>
                     <a href="" class="text-danger"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>      
+             {% endfor %}
             
         </tbody>
     </table>

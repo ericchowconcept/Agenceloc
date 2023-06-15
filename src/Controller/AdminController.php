@@ -6,6 +6,7 @@ use App\Entity\Membre;
 use App\Entity\Vehicule;
 use App\Form\MembreType;
 use App\Form\VehiculeType;
+use App\Repository\CommandeRepository;
 use App\Repository\MembreRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -93,5 +94,16 @@ class AdminController extends AbstractController
             'membres' => $membres,
             'editMembre' => $membre->getId()!=null
         ]);
+    }
+    #[Route('/admin/commandes', name:'admin_commande')]
+    public function commande(CommandeRepository $repo)
+    {
+        $commandes = $repo->findAll();
+
+        return $this->render('admin/gestionCommande.html.twig',[
+            'commandes' => $commandes
+        ]);
+
+
     }
 }
