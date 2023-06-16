@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ vehicule.titre }}{% endblock %}
 
 {% block body %}
 
@@ -27,11 +27,11 @@
         
         
         <div class="d-flex p-2">
-          <button type="submit" class="btn btn-primary">Réserver</button>
+          <button type="submit" class="btn btn-primary ">Réserver</button>
           {{form_end(formCommande) }}
-          
-          {# <a href="admin_vehicule_edit" class="btn btn-warning">Edit</a> #}
-          
+          {% if is_granted("ROLE_ADMIN") %}  
+          <a href="{{ path('admin_vehicule_edit', {id:vehicule.id}) }}" class="btn btn-warning mx-2">Edit</a>
+         {% endif %} 
         </div>
       </div>
     </div>

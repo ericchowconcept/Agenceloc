@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Recapitulatif de votre commande{% endblock %}
+
+{% block body %}
+
+
+
+
+<div class="container card my-5">
+    <h1>Recapitulatif de votre commande</h1>  
+    <div class="row p-5">
+        <div class="col-6 d-flex align-center justify-content-center">
+        <img src="{{ vehicule.photo }}" alt="">
+        </div>
+        <div class="card-body col-6">
+        <h4 class="card-title">{{ vehicule.titre }}</h4>
+        
+        <p class="card-text md-3">{{ vehicule.description }}</p>
+
+        <h5 class="card-subtitle mb-4 text-muted"></h5>
+
+        </div>
+    </div>
+  
+</div>
+ 
+
+{% endblock %}
