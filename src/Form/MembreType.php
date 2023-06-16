@@ -19,6 +19,7 @@ class MembreType extends AbstractType
                     'admin' => 'ROLE_ADMIN',
                     'user'  => 'ROLE_USER'
                 ],
+                'expanded' => true,
                 'multiple' => true
 
             ])

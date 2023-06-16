@@ -68,11 +68,27 @@ class VehiculeController extends AbstractController
         
             $this->addFlash('success', 'Votre commande a été bien enregistré');
 
-            return $this->redirectToRoute('home');      
+            return $this->redirectToRoute('recap', [
+                'id' => $commande->getId()
+            ]);      
         }
             return $this->render('vehicule/view.html.twig',[
                 'formCommande' => $formCommande->createView(),
                 'vehicule' => $vehicule
+            ]);
+        }
+
+        #[Route('/recap/{id}' , name:'recap')]
+        public function recap(Commande $commande): Response
+        {
+            if(!$this->getUser())
+            {
+                return $this->redirectToRoute('home');  
+            }
+
+
+            return $this->render('vehicule/commandeMembre.html.twig',[
+                'commande' => $commande
             ]);
         }
     

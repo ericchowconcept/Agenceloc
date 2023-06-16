@@ -16,9 +16,15 @@ class CommandeType extends AbstractType
         $builder
             ->add('date_heure_depart', DateTimeType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'min' => date_format(new \DateTime('+ 1 days'), "Y-m-d H:i")
+                ]
             ])
             ->add('date_heure_fin', DateTimeType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'min' => date_format(new \DateTime('+ 2 days'), "Y-m-d H:i")
+                ]
             ])
             // ->add('prix_total')
             // ->add('date_enregistrement')
