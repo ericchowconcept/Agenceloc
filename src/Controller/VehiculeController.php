@@ -7,6 +7,8 @@ use App\Entity\Membre;
 use App\Entity\Commande;
 use App\Entity\Vehicule;
 use App\Form\CommandeType;
+use App\Repository\CommandeRepository;
+use App\Repository\MembreRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -92,6 +94,20 @@ class VehiculeController extends AbstractController
 
             return $this->render('vehicule/commandeMembre.html.twig',[
                 'commande' => $commande
+            ]);
+        }
+
+        #[Route('/compte', name:'monCompte')]
+        public function monCompte( CommandeRepository $repo, MembreRepository $membreRepo)
+        {
+            
+            $commandes = $repo->findBy(['membre' => $this->getUser('id')]);
+
+         
+
+            return $this->render('vehicule/historique.html.twig',[
+                'commandes' => $commandes,
+                
             ]);
         }
     

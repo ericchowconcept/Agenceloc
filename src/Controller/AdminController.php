@@ -149,7 +149,7 @@ class AdminController extends AbstractController
             
             'formOrder' => $formOrder->createView(),
             'commandes' => $commandes,
-            'editMembre' => $commande->getId()!=null
+            'editCommandes' => $commande->getId()!=null
         ]);
     }
 

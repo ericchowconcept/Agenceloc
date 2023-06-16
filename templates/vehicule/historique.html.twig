@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+
+{% if app.user %}
+
+<h1 class="text-center">Mon compte</h1>
+<h2 class="text-center mt-5">Historique de commandes</h2>
+
+<div class="d-flex justify-content-center">
+{% for commande in commandes %}
+    <div class="card border-primary m-3 text-center" >
+        <div class="card-header">Numéro de commande : {{ commande.id }}</div>
+        <div class="card-body">
+            <h4 class="card-title">{{ commande.vehicule.titre }}</h4>
+            <img src="{{ commande.vehicule.photo }}" alt="" class="my-3">
+            <p class="card-text">Date de rendu : {{ commande.DateHeureFin|date('d/m/Y H:i') }}</p>
+            <p class="card-text">Prix total : {{ commande.prixtotal }}€</p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endif %}
+
+{% endblock %}
