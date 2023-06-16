@@ -30,9 +30,8 @@
                 <td>{{ commande.Prixtotal }}€</td>
                 <td>{{ commande.DateEnregistrement|date('d/m/Y H:i') }}</td>
                 <td>
-                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
-                    <a href="" class="text-warning"><i class="bi bi-pencil-square"></i></a>
-                    <a href="" class="text-danger"><i class="bi bi-trash"></i></a>
+                    <a href="{{ path('admin_commande_edit', {id: commande.id}) }}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ path('admin_commande_delete', {id: commande.id}) }}" class="text-danger"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>      
              {% endfor %}
@@ -40,5 +39,27 @@
         </tbody>
     </table>
 </div>
+
+    
+
+{% if   %}
+
+<div class="container">
+        {{ form_start(formOrder, {
+            attr:{
+                novalidate : 'novalidate'
+            }
+        }) }}
+    <div class="row">
+        <div class="col-12">{{ form_row(formOrder.vehicule) }}</div>
+        <div class="col-6">{{ form_row(formOrder.prix_total) }}</div>
+        <div class="col-6">{{ form_row(formOrder.date_heure_fin) }}</div>
+        
+        
+    </div>
+        <button class="btn btn-primary">Modifié</button>
+        {{ form_end(formOrder) }}
+</div>
+{% endif %}
 
 {% endblock %}

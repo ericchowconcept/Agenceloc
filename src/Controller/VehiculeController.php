@@ -41,6 +41,9 @@ class VehiculeController extends AbstractController
         if($this->getUser())
         {
             $membre = $this->getUser();
+        }else{
+            $this->addFlash('success', 'Connectez vous ou Inscrivez vous pour reserver!');
+            return $this->redirectToRoute('home'); 
         }
         
 

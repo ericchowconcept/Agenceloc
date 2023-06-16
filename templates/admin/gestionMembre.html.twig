@@ -30,7 +30,6 @@
                 <td>{{ membre.roles| join(',') }}</td>
                 <td>{{ membre.dateenregistrement|date('d/m/Y H:i') }}</td>
                 <td>
-                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
                     <a href="{{ path('admin_membre_edit', {id: membre.id}) }}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
                     <a href="{{ path('admin_membre_delete', {id: membre.id}) }}" class="text-danger"><i class="bi bi-trash"></i></a>
                 </td>

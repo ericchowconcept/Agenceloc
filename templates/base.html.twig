@@ -15,7 +15,7 @@
     <body>
         <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">AGENCELOC</a>
+                <a class="navbar-brand" href="{{ path('home')}}">AGENCELOC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -25,34 +25,28 @@
                             <a class="nav-link active" href="{{ path('home')}}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
                         </li>
                         {% if is_granted("ROLE_ADMIN") %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Backend</a>
                             <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ path('app_admin') }}">Accueil</a>
-                            <a class="dropdown-item" href="{{ path('admin_vehicule') }}">Gestion des Vehicules</a>
-                            <a class="dropdown-item" href="{{ path('admin_membre') }}">Gestion des membres</a>
-                            <a class="dropdown-item" href="{{ path('admin_commande') }}">Gestion des commandes</a>
+                                <a class="dropdown-item" href="{{ path('app_admin') }}">Accueil</a>
+                                <a class="dropdown-item" href="{{ path('admin_vehicule') }}">Gestion des Vehicules</a>
+                                <a class="dropdown-item" href="{{ path('admin_membre') }}">Gestion des membres</a>
+                                <a class="dropdown-item" href="{{ path('admin_commande') }}">Gestion des commandes</a>
                             </div>
                         </li>
                         {% endif %}
                     </ul>
-            </div>
+                </div>
             {% if app.user %}
                     <a href="{{ path('app_logout') }}" class="btn btn-outline-secondary me-2">Déconnexion</a>
             {% else %}
                     <a href="{{ path('app_register') }}" class="btn btn-outline-dark m-2">Inscription</a>
                     <a href="{{ path('app_login') }}" class="btn btn-outline-secondary me-2">Connexion</a>
             {% endif %}
-            
+            </div>
         </nav>
         {% for message in app.flashes('success') %}
         <div class="alert alert-dark text-center w-50 mx-auto my-2">{{ message }}</div>   

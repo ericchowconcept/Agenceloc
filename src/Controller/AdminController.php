@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Membre;
+use App\Entity\Commande;
 use App\Entity\Vehicule;
 use App\Form\MembreType;
+use App\Form\CommandeType;
 use App\Form\VehiculeType;
-use App\Repository\CommandeRepository;
+use App\Form\CommandesType;
+use Doctrine\ORM\EntityManager;
 use App\Repository\MembreRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -105,14 +109,56 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_membre');
     }
 
-    
+    #[Route('/admin/commandes/edit/{id}', name:'admin_commande_edit')]
     #[Route('/admin/commandes', name:'admin_commande')]
-    public function commande(CommandeRepository $repo)
-    {
+    public function commande(EntityManagerInterface $manager, CommandeRepository $repo, Request $request, Commande $commande = null)
+    {   
+
+        if($commande == null)
+        {
+            $commande = new Commande;
+        }
+        
         $commandes = $repo->findAll();
+        
+        $vehicule = new Vehicule;
+        
+        
+        
+        $formOrder = $this->createForm(CommandesType::class, $commande);
+        $formOrder->handleRequest($request);
+
+        if($formOrder->isSubmitted() && $formOrder->isValid())
+        {
+            $commande   ->setDateEnregistrement(new \DateTime())
+                        ->setDateHeureDepart($commande->getDateHeureDepart())
+                        ->setMembre($commande->getMembre());
+
+            $manager->persist($commande);
+            $manager->flush();
+        
+            $this->addFlash('success', 'Votre commande a été bien modifié');
+            return $this->redirectToRoute('admin_commande');
+            
+        }
+        
+    
+       
 
         return $this->render('admin/gestionCommande.html.twig',[
-            'commandes' => $commandes
+            
+            'formOrder' => $formOrder->createView(),
+            'commandes' => $commandes,
+            'editMembre' => $commande->getId()!=null
         ]);
+    }
+
+    #[Route('/admin/commandes/delete/{id}', name:'admin_commande_delete')]
+    public function delete(Commande $commande, EntityManagerInterface $manager)
+    {
+        $manager->remove($commande);
+        $manager->flush();
+        $this->addFlash('success', "La commande a bien été supprimé");
+        return $this->redirectToRoute('admin_commande');
     }
 }
