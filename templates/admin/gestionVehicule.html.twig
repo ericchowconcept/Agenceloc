@@ -36,7 +36,7 @@
                 <td><img src="{{ vehicule.photo }}" alt="" width="100px"></td>
                 <td>{{ vehicule.PrixJournalier() }}€</td>
                 <td>
-                    <a href="" class="text-info"><i class="bi bi-search"></i></a>
+                    
                     <a href="{{ path('admin_vehicule_edit', {id: vehicule.id}) }}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
                     <a href="{{ path('admin_vehicule_delete', {id: vehicule.id}) }}" class="text-danger"><i class="bi bi-trash"></i></a>
                 </td>
