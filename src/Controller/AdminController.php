@@ -95,6 +95,16 @@ class AdminController extends AbstractController
             'editMembre' => $membre->getId()!=null
         ]);
     }
+
+    #[Route('/admin/membres/delete/{id}', name:'admin_membre_delete')]
+    public function deleteMembre(Membre $membre, EntityManagerInterface $manager)
+    {
+        $manager->remove($membre);
+        $manager->flush();
+        $this->addFlash('success', "L'article a bien été supprimé");
+        return $this->redirectToRoute('admin_membre');
+    }
+
     #[Route('/admin/commandes', name:'admin_commande')]
     public function commande(CommandeRepository $repo)
     {
@@ -103,7 +113,5 @@ class AdminController extends AbstractController
         return $this->render('admin/gestionCommande.html.twig',[
             'commandes' => $commandes
         ]);
-
-
     }
 }
